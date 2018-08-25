@@ -296,6 +296,17 @@ Methods noted having options have parameters that may be *optional* or *required
 
 ### wallet.api.save()
 
+### wallet.api.getFeeInfo()
+
+#### Example Data
+
+```javascript
+{
+  "address": "TRTLuxN6FVALYxeAEKhtWDYNS9Vd9dHVp3QHwjKbo76ggQKgUfVjQp8iPypECCy3MwZVyu89k1fWE2Ji6EKedbrqECHHWouZN6g",
+  "amount": 5000
+}
+```
+
 ### wallet.api.getViewKey()
 
 #### Example Data
@@ -700,6 +711,7 @@ If the **nonce** column is *Yes* you may send a *nonce* in the payload in additi
 |challenge|No|No|*string* sha256 hash of password|
 |reset|Yes|Yes|See [wallet.api.reset()](#walletapireset)|
 |save|Yes|Yes|See [wallet.api.save()](#walletapisave)|
+|getFeeInfo|Yes|Yes|See [wallet.api.getFeeInfo()](#walletapigetfeeinfo)|
 |getViewKey|Yes|Yes|See [wallet.api.getViewKey()](#walletapigetviewkey)|
 |getSpendKeys|Yes|Yes|See [wallet.api.getSpendKeys(options)](#walletapigetspendkeysoptions)|
 |getMnemonicSeed|Yes|Yes|See [wallet.api.getMnemonicSeed(options)](#walletapigetmnemonicseed|
@@ -759,9 +771,10 @@ All responses except for ***auth*** return data in the same format.
 |auth|No|*boolean* Responds to a client initiated *challenge* event. If **true** the password was correct. If it was wrong you'll know soon enough.|
 |reset|Yes|See [wallet.api.reset()](#walletapireset)|
 |save|Yes|See [wallet.api.save()](#walletapisave)|
+|getFeeInfo|Yes|See [wallet.api.getFeeInfo()](#walletapigetfeeinfo)|
 |getViewKey|Yes|See [wallet.api.getViewKey()](#walletapigetviewkey)|
 |getSpendKeys|Yes|See [wallet.api.getSpendKeys(options)](#walletapigetspendkeysoptions)|
-|getMnemonicSeed|Yes|See [wallet.api.getMnemonicSeed(options)](#walletapigetmnemonicseed|
+|getMnemonicSeed|Yes|See [wallet.api.getMnemonicSeed(options)](#walletapigetmnemonicseed)|
 |getStatus|Yes|See [wallet.api.getStatus()](#walletapigetstatus)|
 |getAddresses|Yes|See [wallet.api.getAddresses()](#walletapigetaddresses)|
 |createAddress|Yes|See [wallet.api.createAddress(options)](#walletapicreateaddressoptions)|

@@ -30,6 +30,6 @@
     "nonce": "^1.0.4",
     "sha256": "^0.2.0",
     "socket.io": "^2.1.1",
-    "turtlecoin-rpc": "^0.7.0"
+    "turtlecoin-rpc": "^0.8.0"
   }
 }
