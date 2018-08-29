@@ -85,8 +85,8 @@ var wallet = new Walletd({
   logFile: false, // The path to the log file you would like walletd to keep
   logLevel: 4, // The log level to use with walletd
   syncFromZero: false, // If set to true, will tell walletd to always sync the container from zero.
-  daemonAddress: '127.0.0.1', // When using a remote node (localNode === false), provide the IP address or hostname of the daemon here
-  daemonPort: 11898, // Remote daemon port
+  daemonRpcAddress: '127.0.0.1', // Daemon RPC IP Address (if your daemon doesn't use 127.0.0.1 or 0.0.0.0 -- you really need to change this)
+  daemonRpcAddress: 11898, // Daemon RPC port
   
   // RPC API default values
   defaultMixin: 7, // the default mixin to use for transactions

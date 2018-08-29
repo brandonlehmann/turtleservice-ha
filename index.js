@@ -1,5 +1,5 @@
 // Copyright (c) 2018, Brandon Lehmann, The TurtleCoin Developers
-// 
+//
 // Please see the included LICENSE file for more information.
 
 'use strict'
@@ -43,11 +43,11 @@ const Walletd = function (opts) {
   // this.viewKey = opts.viewKey || false
   // this.spendKey = opts.spendKey || false
   // this.mnemonicSeed = opts.mnemonicSeed || false
-  this.logFile = opts.logFile || false
+  this.logFile = opts.logFile || path.resolve(__dirname, './turtle-service.log')
   this.logLevel = opts.logLevel || 4
   this.syncFromZero = opts.syncFromZero || false
-  this.daemonAddress = opts.daemonAddress || '127.0.0.1'
-  this.daemonPort = opts.daemonPort || 11898
+  this.daemonRpcAddress = opts.daemonRpcAddress || '127.0.0.1'
+  this.daemonRpcPort = opts.daemonRpcPort || 11898
 
   // Begin RPC API options
   this.defaultMixin = (opts.defaultMixin !== undefined) ? opts.defaultMixin : 7
@@ -295,11 +295,11 @@ Walletd.prototype._buildargs = function () {
   }
 
   // Remote node options
-  if (this.daemonAddress) {
-    args = util.format('%s --daemon-address %s', args, this.daemonAddress)
+  if (this.daemonRpcAddress) {
+    args = util.format('%s --daemon-address %s', args, this.daemonRpcAddress)
   }
-  if (this.daemonPort) {
-    args = util.format('%s --daemon-port %s', args, this.daemonPort)
+  if (this.daemonRpcPort) {
+    args = util.format('%s --daemon-port %s', args, this.daemonRpcPort)
   }
 
   return args.split(' ')
