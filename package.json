@@ -1,6 +1,6 @@
 {
   "name": "walletd-ha",
-  "version": "0.8.1",
+  "version": "0.8.3",
   "description": "Wraps the TurtleCoin turtle-service process and helps keep it up and running and ready for connections.",
   "main": "index.js",
   "scripts": {
@@ -30,6 +30,6 @@
     "nonce": "^1.0.4",
     "sha256": "^0.2.0",
     "socket.io": "^2.1.1",
-    "turtlecoin-rpc": "^0.8.0"
+    "turtlecoin-rpc": "^0.8.3"
   }
 }

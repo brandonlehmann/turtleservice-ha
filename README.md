@@ -89,7 +89,7 @@ var wallet = new Walletd({
   daemonRpcPort: 11898, // Daemon RPC port
   
   // RPC API default values
-  defaultMixin: 7, // the default mixin to use for transactions
+  defaultMixin: 3, // the default mixin to use for transactions
   defaultFee: 0.1, // the default transaction fee for transactions
   defaultBlockCount: 1, // the default number of blocks when blockCount is required
   decimalDivisor: 100, // Currency has many decimal places?
