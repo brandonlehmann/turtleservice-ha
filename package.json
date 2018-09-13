@@ -1,6 +1,6 @@
 {
   "name": "walletd-ha",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "description": "Wraps the TurtleCoin turtle-service process and helps keep it up and running and ready for connections.",
   "main": "index.js",
   "scripts": {

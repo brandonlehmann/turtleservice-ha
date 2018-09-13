@@ -29,7 +29,7 @@ const Walletd = function (opts) {
   this.enableWebSocket = opts.enableWebSocket || true
 
   // Begin walletd options
-  this.path = opts.path || path.resolve(__dirname, './turtle-service' + ((os.platform() === 'win32') ? '.exe' : null))
+  this.path = opts.path || path.resolve(__dirname, './turtle-service' + ((os.platform() === 'win32') ? '.exe' : ''))
   this.config = opts.config || false
   this.bindAddress = opts.bindAddress || '127.0.0.1'
   this.bindPort = opts.bindPort || 8070
