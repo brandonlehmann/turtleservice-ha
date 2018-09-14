@@ -1,6 +1,6 @@
 [![NPM](https://nodei.co/npm/walletd-ha.png?downloads=true&stars=true)](https://nodei.co/npm/walletd-ha/)
 
-[![Build Status](https://travis-ci.org/brandonlehmann/walletd-ha.png?branch=master)](https://travis-ci.org/brandonlehmann/walletd-ha)
+[![Build Status](https://travis-ci.org/brandonlehmann/walletd-ha.png?branch=master)](https://travis-ci.org/brandonlehmann/walletd-ha) [![Build Status](https://ci.appveyor.com/api/projects/status/github/brandonlehmann/walletd-ha?branch=master&svg=true)](https://ci.appveyor.com/project/brandonlehmann/walletd-ha/branch/master)
 
 
 # TurtleCoin Walletd High-Availability Wrapper
