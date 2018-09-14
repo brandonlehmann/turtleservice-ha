@@ -1,3 +1,8 @@
+[![NPM](https://nodei.co/npm/walletd-ha.png?downloads=true&stars=true)](https://nodei.co/npm/walletd-ha/)
+
+[![Build Status](https://travis-ci.org/brandonlehmann/walletd-ha.png?branch=master)](https://travis-ci.org/brandonlehmann/walletd-ha)
+
+
 # TurtleCoin Walletd High-Availability Wrapper
 
 This project is designed to wrap the walletd process on a *nix system and monitor it for hangups, locks, and etc that cause the wallet to stop responding.
