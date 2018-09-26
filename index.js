@@ -4,7 +4,7 @@
 
 'use strict'
 
-const WalletdRPC = require('turtlecoin-rpc').Walletd
+const TurtleServiceRPC = require('turtlecoin-rpc').TurtleService
 const WebSocket = require('./lib/websocket.js')
 const pty = require('node-pty')
 const util = require('util')
@@ -16,9 +16,9 @@ const os = require('os')
 const Storage = require('node-storage')
 const nonce = require('nonce')()
 
-const Walletd = function (opts) {
+const TurtleService = function (opts) {
   opts = opts || {}
-  if (!(this instanceof Walletd)) return new Walletd(opts)
+  if (!(this instanceof TurtleService)) return new TurtleService(opts)
 
   this.appName = opts.appName || 'default'
   this.pollingInterval = opts.pollingInterval || 10
@@ -28,7 +28,7 @@ const Walletd = function (opts) {
   this.timeout = opts.timeout || 2000
   this.enableWebSocket = opts.enableWebSocket || true
 
-  // Begin walletd options
+  // Begin turtle-service options
   this.path = opts.path || path.resolve(__dirname, './turtle-service' + ((os.platform() === 'win32') ? '.exe' : ''))
   this.config = opts.config || false
   this.bindAddress = opts.bindAddress || '127.0.0.1'
@@ -119,9 +119,9 @@ const Walletd = function (opts) {
     this.isRunning = false
   })
 }
-inherits(Walletd, EventEmitter)
+inherits(TurtleService, EventEmitter)
 
-Walletd.prototype.start = function () {
+TurtleService.prototype.start = function () {
   this.emit('info', 'Attempting to start turtle-service...')
   this.synced = false
   var args = this._buildargs()
@@ -162,7 +162,7 @@ Walletd.prototype.start = function () {
   this.emit('start', util.format('%s%s', this.path, args.join(' ')))
 }
 
-Walletd.prototype.stop = function () {
+TurtleService.prototype.stop = function () {
   if (this.saveIntervalPtr) {
     clearInterval(this.saveIntervalPtr)
     this.saveIntervalPtr = null
@@ -186,11 +186,11 @@ Walletd.prototype.stop = function () {
   }, (this.timeout * 2))
 }
 
-Walletd.prototype.write = function (data) {
+TurtleService.prototype.write = function (data) {
   this._write(util.format('%s\r', data))
 }
 
-Walletd.prototype._stdio = function (data) {
+TurtleService.prototype._stdio = function (data) {
   if (data.indexOf('Loading container') !== -1) {
     this.emit('info', 'turtle-service is loading the wallet container...')
   } else if (data.indexOf('The password is wrong') !== -1) {
@@ -212,7 +212,7 @@ Walletd.prototype._stdio = function (data) {
   }
 }
 
-Walletd.prototype._startChecks = function () {
+TurtleService.prototype._startChecks = function () {
   this.pollingIntervalPtr = setInterval(() => {
     this.api.getStatus().then((result) => {
       this.emit('status', result)
@@ -241,7 +241,7 @@ Walletd.prototype._startChecks = function () {
   }, (this.saveInterval * 1000))
 }
 
-Walletd.prototype._triggerDown = function () {
+TurtleService.prototype._triggerDown = function () {
   if (!this.trigger) {
     this.trigger = setTimeout(() => {
       this.emit('down')
@@ -249,7 +249,7 @@ Walletd.prototype._triggerDown = function () {
   }
 }
 
-Walletd.prototype._triggerUp = function () {
+TurtleService.prototype._triggerUp = function () {
   if (!this.isRunning) {
     this.isRunning = true
     this.emit('alive')
@@ -260,11 +260,11 @@ Walletd.prototype._triggerUp = function () {
   }
 }
 
-Walletd.prototype._write = function (data) {
+TurtleService.prototype._write = function (data) {
   this.child.write(data)
 }
 
-Walletd.prototype._buildargs = function () {
+TurtleService.prototype._buildargs = function () {
   var args = ''
 
   // turtle-service specific options
@@ -313,8 +313,8 @@ Walletd.prototype._buildargs = function () {
   return args.split(' ')
 }
 
-Walletd.prototype._setupAPI = function () {
-  this.api = new WalletdRPC({
+TurtleService.prototype._setupAPI = function () {
+  this.api = new TurtleServiceRPC({
     host: this.bindAddress,
     port: this.bindPort,
     timeout: this.timeout,
@@ -329,7 +329,7 @@ Walletd.prototype._setupAPI = function () {
   })
 }
 
-Walletd.prototype._setupWebSocket = function () {
+TurtleService.prototype._setupWebSocket = function () {
   if (this.enableWebSocket) {
     this.webSocket = new WebSocket({
       password: this.rpcPassword,
@@ -418,7 +418,7 @@ Walletd.prototype._setupWebSocket = function () {
   }
 }
 
-Walletd.prototype._registerWebSocketClientEvents = function (socket) {
+TurtleService.prototype._registerWebSocketClientEvents = function (socket) {
   var that = this
   var events = Object.getPrototypeOf(this.api)
   events = Object.getOwnPropertyNames(events).filter((f) => {
@@ -453,4 +453,4 @@ function fixPath (oldPath) {
   return oldPath
 }
 
-module.exports = Walletd
+module.exports = TurtleService
