@@ -20,7 +20,7 @@ It also provides *easy access* to the turtle-service RPC API via native [Javascr
 5. [Documentation](#documentation)
    1. [Methods](#methods)
    2. [Events](#events)
-   3. [TurtleService RPC API Interface](#walletd-rpc-api-interface)
+   3. [TurtleService RPC API Interface](#turtleservice-rpc-api-interface)
    4. [WebSocket Connections](#websocket-connections)
 
 ## To Do
