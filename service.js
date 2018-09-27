@@ -1,9 +1,9 @@
 'use strict'
 
-const Walletd = require('./')
+const TurtleService = require('./')
 const util = require('util')
 
-var wallet = new Walletd({
+var wallet = new TurtleService({
   containerFile: './container.walletd',
   rpcPassword: 'changeme'
 })

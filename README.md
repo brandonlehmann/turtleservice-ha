@@ -3,13 +3,13 @@
 [![Build Status](https://travis-ci.org/brandonlehmann/walletd-ha.png?branch=master)](https://travis-ci.org/brandonlehmann/walletd-ha) [![Build Status](https://ci.appveyor.com/api/projects/status/github/brandonlehmann/walletd-ha?branch=master&svg=true)](https://ci.appveyor.com/project/brandonlehmann/walletd-ha/branch/master)
 
 
-# TurtleCoin Walletd High-Availability Wrapper
+# TurtleCoin Turtle-Service High-Availability Wrapper
 
-This project is designed to wrap the walletd process on a *nix system and monitor it for hangups, locks, and etc that cause the wallet to stop responding.
+This project is designed to wrap the turtle-service process on a *nix system and monitor it for hangups, locks, and etc that cause the wallet to stop responding.
 
-The sample service.js is includes a VERY basic example of how the wrapper can be used. For all options, please continue reading as it provides a VERY robust interface.
+The sample service.js includes a VERY basic example of how the wrapper can be used. For all options, please continue reading as it provides a VERY robust interface.
 
-It also provides *easy access* to the walletd RPC API via native [Javascript Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
+It also provides *easy access* to the turtle-service RPC API via native [Javascript Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
 
 ## Table of Contents
 
@@ -20,9 +20,9 @@ It also provides *easy access* to the walletd RPC API via native [Javascript Pro
 5. [Documentation](#documentation)
    1. [Methods](#methods)
    2. [Events](#events)
-   3. [Walletd RPC API Interface](#walletd-rpc-api-interface)
+   3. [TurtleService RPC API Interface](#turtleservice-rpc-api-interface)
    4. [WebSocket Connections](#websocket-connections)
- 
+
 ## To Do
 
 1. After the wallet container is synced, compare the wallet height to the network_height of the daemon (or public node) to detect if the wallet is out of sync.
@@ -30,17 +30,17 @@ It also provides *easy access* to the walletd RPC API via native [Javascript Pro
 ## Dependencies
 
 * [NodeJS v8.x](https://nodejs.org/)
-* [walletd](https://github.com/turtlecoin/turtlecoin/releases) v0.5.0 or higher
+* [turtle-service](https://github.com/turtlecoin/turtlecoin/releases) v0.5.0 or higher
 
 ## Easy Start
 
-You *must* copy walletd into the ```walletd-ha``` folder for the easy start process to occur.
+You *must* copy turtle-service into the ```turtleservice-ha``` folder for the easy start process to occur.
 
 ```text
-git clone https://github.com/brandonlehmann/walletd-ha.git
-cd walletd-ha
-cp <walletd> .
-./walletd -g -w container.walletd
+git clone https://github.com/brandonlehmann/turtleservice-ha.git
+cd turtleservice-ha
+cp <turtle-service> .
+./turtle-service -g -w container.walletd
 npm i & node service.js
 ```
 
@@ -56,43 +56,43 @@ npm install -g pm2
 pm2 startup
 pm2 install pm2-logrotate
 
-pm2 start service.js --watch --name walletd
+pm2 start service.js --watch --name turtleservice
 pm2 save
 ```
 
 ## Documentation
 
-### Initilization
+### Initialization
 
-Practically all of the walletd command line arguments are exposed in the constructor method. Simply include them in your list of options to activate or use them. Default values are defined below. As always, please use values that make sense for your implementation.
+Practically all of the turtle-service command line arguments are exposed in the constructor method. Simply include them in your list of options to activate or use them. Default values are defined below. As always, please use values that make sense for your implementation.
 
 There are a lot of different options available so reading through the full list is to your advantage.
 
 ```javascript
-var wallet = new Walletd({
+var wallet = new TurtleService({
   appName: 'default', // This defines an application name used to store some settings.
-  pollingInterval: 10, // Check to make sure that walletd is alive every x seconds
-  maxPollingFailures: 3, // After the polling checks fail x times, report the walletd process down
+  pollingInterval: 10, // Check to make sure that turtle-service is alive every x seconds
+  maxPollingFailures: 3, // After the polling checks fail x times, report the turtle-service process down
   saveInterval: 10, // issue an automatic save request every x seconds as long as the wallet is synced
   scanInterval: 5, // scan the wallet for new transactions every x seconds as long as the wallet is synced
   timeout: 2000, // consider RPC calls timed out after x milliseconds
-  path: './walletd', // the path to the walletd binary
+  path: './turtle-service.exe', // the path to the turtle-service binary
   enableWebSocket: true, // enable the WebSocket server at bindPort + 1
-  
-  // Standard walletd options start here
-  config: false, // the path to a walletd config file -- if you so choose
-  bindAddress: '127.0.0.1', // The IP address that walletd will bind to
-  bindPort: 8070, // The port that walletd will bind to
+
+  // Standard turtle-service options start here
+  config: false, // the path to a turtle-service config file -- if you so choose
+  bindAddress: '127.0.0.1', // The IP address that turtle-service will bind to
+  bindPort: 8070, // The port that turtle-service will bind to
   rpcPassword: false, // You really should use an RPC password
   rpcLegacySecurity: false, // Turning this to true, removes the requirement for a RPC password, either rpcPassword or rpcLegacySecurity MUST be set
-  containerFile: false, // The path to your walletd container file
-  containerPassword: false, // The password to your walletd container file
-  logFile: false, // The path to the log file you would like walletd to keep
-  logLevel: 4, // The log level to use with walletd
-  syncFromZero: false, // If set to true, will tell walletd to always sync the container from zero.
+  containerFile: false, // The path to your turtle-service container file
+  containerPassword: false, // The password to your turtle-service container file
+  logFile: false, // The path to the log file you would like turtle-service to keep
+  logLevel: 4, // The log level to use with turtle-service
+  syncFromZero: false, // If set to true, will tell turtle-service to always sync the container from zero.
   daemonRpcAddress: '127.0.0.1', // Daemon RPC IP Address (if your daemon doesn't use 127.0.0.1 or 0.0.0.0 -- you really need to change this)
   daemonRpcPort: 11898, // Daemon RPC port
-  
+
   // RPC API default values
   defaultMixin: 3, // the default mixin to use for transactions
   defaultFee: 0.1, // the default transaction fee for transactions
@@ -108,7 +108,7 @@ var wallet = new Walletd({
 
 ### wallet.start()
 
-Starts walletd and starts monitoring the process.
+Starts turtle-service and starts monitoring the process.
 
 ```javascript
 wallet.start()
@@ -116,7 +116,7 @@ wallet.start()
 
 ### wallet.stop()
 
-Stops walletd and halts all monitoring processes.
+Stops turtle-service and halts all monitoring processes.
 
 ```javascript
 wallet.stop()
@@ -124,7 +124,7 @@ wallet.stop()
 
 ### wallet.write(text)
 
-If you really must write text to the actual walletd console, you can do so with this method. You'll need to parse the output of the *data* event as defined below.
+If you really must write text to the actual turtle-service console, you can do so with this method. You'll need to parse the output of the *data* event as defined below.
 
 ```javascript
 wallet.write('help')
@@ -134,7 +134,7 @@ wallet.write('help')
 
 ### Event - *alive*
 
-This event is fired initially when the underlying walletd process is detected as being ```alive```. It will also fire when it comes back ```alive``` after the process has been restarted. In addition, it will fire on the websocket connection after a successful authentication if the service is indeed ```alive```.
+This event is fired initially when the underlying turtle-service process is detected as being ```alive```. It will also fire when it comes back ```alive``` after the process has been restarted. In addition, it will fire on the websocket connection after a successful authentication if the service is indeed ```alive```.
 
 ```javascript
 wallet.on('alive', () => {
@@ -144,7 +144,7 @@ wallet.on('alive', () => {
 
 ### Event - *close*
 
-This event is fired when the underlying walletd process closes, dies, is killed for whatever reason. Usually, when this occurs we want to restart the process with ```wallet.start()```
+This event is fired when the underlying turtle-service process closes, dies, is killed for whatever reason. Usually, when this occurs we want to restart the process with ```wallet.start()```
 
 ```javascript
 wallet.on('close', (exitcode) => {
@@ -154,7 +154,7 @@ wallet.on('close', (exitcode) => {
 
 ### Event - *data*
 
-Provides the actual console output of walletd on a per line basis.
+Provides the actual console output of turtle-service on a per line basis.
 
 ```javascript
 wallet.on('data', (data) => {
@@ -164,7 +164,7 @@ wallet.on('data', (data) => {
 
 ### Event - *down*
 
-This event is fired when we detected that walletd appears **down**. It means that it is not responding to RPC requests. If you want to make it automatically restart walletd when this occurs, simply ```wallet.stop()``` in the event.
+This event is fired when we detected that turtle-service appears **down**. It means that it is not responding to RPC requests. If you want to make it automatically restart turtle-service when this occurs, simply ```wallet.stop()``` in the event.
 
 ```javascript
 wallet.on('down', () => {
@@ -214,7 +214,7 @@ wallet.on('scan', (fromBlock, toBlock) => {
 
 ### Event - *status*
 
-This event is fired every polling cycle. It returns the equivalent of the walletd *getStatus* API call.
+This event is fired every polling cycle. It returns the equivalent of the turtle-service *getStatus* API call.
 
 ```javascript
 wallet.on('status', (status) => {
@@ -235,7 +235,7 @@ wallet.on('status', (status) => {
 
 ### Event - *synced*
 
-This event is fired when walletd is fully synchronized with the network.
+This event is fired when turtle-service is fully synchronized with the network.
 
 ```javascript
 wallet.on('synced', () => {
@@ -245,7 +245,7 @@ wallet.on('synced', () => {
 
 ### Event - *transaction*
 
-This event is fired for **each** transaction that walletd says belongs to us. It contains the information for each ***transfer*** in the transaction rolled up into a single object for each ***transfer*** with one small addition of ```inbound``` which is a *boolean*. It will ***only*** fire for the portion(s) of the transaction where the transfer **belong** to the wallet container.
+This event is fired for **each** transaction that turtle-service says belongs to us. It contains the information for each ***transfer*** in the transaction rolled up into a single object for each ***transfer*** with one small addition of ```inbound``` which is a *boolean*. It will ***only*** fire for the portion(s) of the transaction where the transfer **belong** to the wallet container.
 
 ***Special Note: Any and all amounts/fees will already be in HUMAN readable units. DO NOT DIVIDE THEM AGAIN unless you've specified ```decimalDivisor``` as ```1``` in the options. You have been warned.***
 
@@ -287,9 +287,9 @@ wallet.on('warning', (warn) => {
 })
 ```
 
-## Walletd RPC API Interface
+## TurtleService RPC API Interface
 
-As we can actually run this wrapper inside another nodeJS project, we expose all of the walletd RPC API commands via the ```wallet.api``` property. Each of the below methods are [Javascript Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises). For safety sake, **always** handle your promise catches as we do use them properly.
+As we can actually run this wrapper inside another nodeJS project, we expose all of the turtle-service RPC API commands via the ```wallet.api``` property. Each of the below methods are [Javascript Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises). For safety sake, **always** handle your promise catches as we do use them properly.
 
 ***Special Note: Any and all amounts/fees will already be in HUMAN readable units. DO NOT DIVIDE THEM AGAIN unless you've specified ```decimalDivisor``` as ```1``` in the options. You have been warned.***
 
@@ -707,7 +707,7 @@ A WebSocket [socket.io](https://socket.io/) server is initialized if ```enableWe
 
 This server requires that the client authenticates otherwise you will **not** receive any of the below events aside from the *challenge* event. Authentication must occur within 10 seconds or the socket will be disconnected.
 
-If the **nonce** column is *Yes* you may send a *nonce* in the payload in addition to the options defined. 
+If the **nonce** column is *Yes* you may send a *nonce* in the payload in addition to the options defined.
 
 ### Client Initiated Events
 
