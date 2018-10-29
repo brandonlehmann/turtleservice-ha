@@ -1,6 +1,6 @@
 {
-  "name": "walletd-ha",
-  "version": "0.8.4",
+  "name": "turtleservice-ha",
+  "version": "0.8.5",
   "description": "Wraps the TurtleCoin turtle-service process and helps keep it up and running and ready for connections.",
   "main": "index.js",
   "scripts": {
@@ -8,10 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/brandonlehmann/walletd-ha.git"
+    "url": "git+https://github.com/brandonlehmann/turtleservice-ha.git"
   },
   "keywords": [
     "TurtleCoin",
+    "turtleservice",
+    "turtle-service",
     "walletd",
     "wrapper",
     "high-availability",
@@ -25,11 +27,11 @@
     "standard": "^11.0.1"
   },
   "dependencies": {
-    "node-pty": "^0.7.4",
+    "node-pty": "^0.7.8",
     "node-storage": "0.0.7",
     "nonce": "^1.0.4",
     "sha256": "^0.2.0",
     "socket.io": "^2.1.1",
-    "turtlecoin-rpc": "^0.8.3"
+    "turtlecoin-rpc": "^0.8.4"
   }
 }

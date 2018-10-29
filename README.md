@@ -1,6 +1,6 @@
-[![NPM](https://nodei.co/npm/walletd-ha.png?downloads=true&stars=true)](https://nodei.co/npm/walletd-ha/)
+[![NPM](https://nodei.co/npm/turtleservice-ha.png?downloads=true&stars=true)](https://nodei.co/npm/turtleservice-ha/)
 
-[![Build Status](https://travis-ci.org/brandonlehmann/walletd-ha.png?branch=master)](https://travis-ci.org/brandonlehmann/walletd-ha) [![Build Status](https://ci.appveyor.com/api/projects/status/github/brandonlehmann/walletd-ha?branch=master&svg=true)](https://ci.appveyor.com/project/brandonlehmann/walletd-ha/branch/master)
+[![Build Status](https://travis-ci.org/brandonlehmann/turtleservice-ha.png?branch=master)](https://travis-ci.org/brandonlehmann/turtleservice-ha) [![Build Status](https://ci.appveyor.com/api/projects/status/github/brandonlehmann/turtleservice-ha?branch=master&svg=true)](https://ci.appveyor.com/project/brandonlehmann/turtleservice-ha/branch/master)
 
 
 # TurtleCoin Turtle-Service High-Availability Wrapper
@@ -29,8 +29,8 @@ It also provides *easy access* to the turtle-service RPC API via native [Javascr
 
 ## Dependencies
 
-* [NodeJS v8.x](https://nodejs.org/)
-* [turtle-service](https://github.com/turtlecoin/turtlecoin/releases) v0.5.0 or higher
+* [NodeJS](https://nodejs.org/) >= 8.x
+* [turtle-service](https://github.com/turtlecoin/turtlecoin/releases) v0.8.4 or higher
 
 ## Easy Start
 
@@ -41,7 +41,7 @@ git clone https://github.com/brandonlehmann/turtleservice-ha.git
 cd turtleservice-ha
 cp <turtle-service> .
 ./turtle-service -g -w container.walletd
-npm i & node service.js
+sudo npm install & node service.js
 ```
 
 **It is highly recommended that you create a container with a password and pass that into the wrapper. For your own security, please make sure that you use passwords for both the RPC server and the container itself. To do otherwise will fill you with regret.**
@@ -301,7 +301,7 @@ Methods noted having options have parameters that may be *optional* or *required
 
 ### wallet.api.save()
 
-### wallet.api.getFeeInfo()
+### wallet.api.getNodeFeeInfo()
 
 #### Example Data
 
@@ -716,7 +716,7 @@ If the **nonce** column is *Yes* you may send a *nonce* in the payload in additi
 |challenge|No|No|*string* sha256 hash of password|
 |reset|Yes|Yes|See [wallet.api.reset()](#walletapireset)|
 |save|Yes|Yes|See [wallet.api.save()](#walletapisave)|
-|getFeeInfo|Yes|Yes|See [wallet.api.getFeeInfo()](#walletapigetfeeinfo)|
+|getNodeFeeInfo|Yes|Yes|See [wallet.api.getNodeFeeInfo()](#walletapigetnodefeeinfo)|
 |getViewKey|Yes|Yes|See [wallet.api.getViewKey()](#walletapigetviewkey)|
 |getSpendKeys|Yes|Yes|See [wallet.api.getSpendKeys(options)](#walletapigetspendkeysoptions)|
 |getMnemonicSeed|Yes|Yes|See [wallet.api.getMnemonicSeed(options)](#walletapigetmnemonicseed|
@@ -776,7 +776,7 @@ All responses except for ***auth*** return data in the same format.
 |auth|No|*boolean* Responds to a client initiated *challenge* event. If **true** the password was correct. If it was wrong you'll know soon enough.|
 |reset|Yes|See [wallet.api.reset()](#walletapireset)|
 |save|Yes|See [wallet.api.save()](#walletapisave)|
-|getFeeInfo|Yes|See [wallet.api.getFeeInfo()](#walletapigetfeeinfo)|
+|getNodeFeeInfo|Yes|See [wallet.api.getNodeFeeInfo()](#walletapigetnodefeeinfo)|
 |getViewKey|Yes|See [wallet.api.getViewKey()](#walletapigetviewkey)|
 |getSpendKeys|Yes|See [wallet.api.getSpendKeys(options)](#walletapigetspendkeysoptions)|
 |getMnemonicSeed|Yes|See [wallet.api.getMnemonicSeed(options)](#walletapigetmnemonicseed)|
@@ -801,8 +801,6 @@ All responses except for ***auth*** return data in the same format.
 
 ## License
 
-```
 Copyright (C) 2018 Brandon Lehmann, The TurtleCoin Developers
 
 Please see the included LICENSE file for more information.
-```
