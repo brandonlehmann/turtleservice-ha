@@ -41,7 +41,7 @@ git clone https://github.com/brandonlehmann/turtleservice-ha.git
 cd turtleservice-ha
 cp <turtle-service> .
 ./turtle-service -g -w container.walletd
-sudo npm install & node service.js
+npm install & node service.js
 ```
 
 **It is highly recommended that you create a container with a password and pass that into the wrapper. For your own security, please make sure that you use passwords for both the RPC server and the container itself. To do otherwise will fill you with regret.**
