@@ -49,7 +49,7 @@ wallet.on('scan', (fromBlock, toBlock) => {
   log(util.format('[WALLET] Scanning block %s to %s', fromBlock, toBlock))
 })
 
-wallet.on('transcation', (transaction) => {
+wallet.on('transaction', (transaction) => {
   log(util.format('[WALLET] %s transaction %s %s in the amount of %s', (transaction.inbound) ? 'incoming' : 'outgoing', (transaction.inbound) ? 'to' : 'from', transaction.address, transaction.amount))
 })
 
