@@ -351,7 +351,7 @@ TurtleService.prototype._setupWebSocket = function () {
     this.webSocket.on('auth.success', (socket) => {
       this._registerWebSocketClientEvents(socket)
       if (this.isRunning) {
-        this.webSocket.send({socket: socket, event: 'alive'})
+        this.webSocket.send({ socket: socket, event: 'alive' })
       }
       this.emit('info', util.format('[WEBSOCKET] Client authenticated with socketId: %s', socket.id))
     })
@@ -369,51 +369,51 @@ TurtleService.prototype._setupWebSocket = function () {
     })
 
     this.on('close', (exitcode) => {
-      this.webSocket.broadcast({event: 'close', data: exitcode})
+      this.webSocket.broadcast({ event: 'close', data: exitcode })
     })
 
     this.on('data', (data) => {
-      this.webSocket.broadcast({event: 'data', data})
+      this.webSocket.broadcast({ event: 'data', data })
     })
 
     this.on('down', () => {
-      this.webSocket.broadcast({event: 'down'})
+      this.webSocket.broadcast({ event: 'down' })
     })
 
     this.on('error', (err) => {
-      this.webSocket.broadcast({event: 'error', data: err})
+      this.webSocket.broadcast({ event: 'error', data: err })
     })
 
     this.on('info', (info) => {
-      this.webSocket.broadcast({event: 'info', data: info})
+      this.webSocket.broadcast({ event: 'info', data: info })
     })
 
     this.on('save', () => {
-      this.webSocket.broadcast({event: 'save'})
+      this.webSocket.broadcast({ event: 'save' })
     })
 
     this.on('scan', (fromBlock, toBlock) => {
-      this.webSocket.broadcast({event: 'scan', data: {fromBlock, toBlock}})
+      this.webSocket.broadcast({ event: 'scan', data: { fromBlock, toBlock } })
     })
 
     this.on('status', (status) => {
-      this.webSocket.broadcast({event: 'status', data: status})
+      this.webSocket.broadcast({ event: 'status', data: status })
     })
 
     this.on('synced', () => {
-      this.webSocket.broadcast({event: 'synced'})
+      this.webSocket.broadcast({ event: 'synced' })
     })
 
     this.on('transaction', (transaction) => {
-      this.webSocket.broadcast({event: 'transaction', data: transaction})
+      this.webSocket.broadcast({ event: 'transaction', data: transaction })
     })
 
     this.on('warning', (warning) => {
-      this.webSocket.broadcast({event: 'info', data: warning})
+      this.webSocket.broadcast({ event: 'info', data: warning })
     })
 
     this.on('alive', () => {
-      this.webSocket.broadcast({event: 'alive'})
+      this.webSocket.broadcast({ event: 'alive' })
     })
   }
 }
@@ -437,9 +437,9 @@ TurtleService.prototype._registerWebSocketClientEvents = function (socket) {
         }
         data.nonce = data.nonce || nonce()
         that.api[evt](data).then((result) => {
-          socket.emit(evt, {nonce: data.nonce, data: result})
+          socket.emit(evt, { nonce: data.nonce, data: result })
         }).catch((err) => {
-          socket.emit(evt, {nonce: data.nonce, error: err.toString()})
+          socket.emit(evt, { nonce: data.nonce, error: err.toString() })
         })
       })
     })()
